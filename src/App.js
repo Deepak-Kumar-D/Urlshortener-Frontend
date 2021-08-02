@@ -1,7 +1,7 @@
 import "./App.css";
 import { useState, useEffect } from "react";
-import { Route, Switch, Link } from "react-router-dom";
-import { GiHamburgerMenu } from "react-icons/gi";
+import { Route, Switch } from "react-router-dom";
+import Navbar from "./components/Navbar";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import UrlShortener from "./components/UrlShortener";
@@ -11,7 +11,6 @@ import Footer from "./components/Footer";
 function App() {
   const [url, setUrl] = useState();
   const [urlData, setUrlData] = useState([]);
-  const [show, setShow] = useState("");
 
   // Fetching the url data on page load and on data update
   const Data = async () => {
@@ -39,37 +38,15 @@ function App() {
     Data();
   };
 
-  const Toggle = () => {
-    if (show === "") setShow("block");
-    else setShow("");
-  };
-
   useEffect(() => {
     Data();
   }, []);
   return (
     <div className="App">
       <img className="bgImg" src="/images/Triangle Pattern.png" alt="bgImg" />
+
       {/* Navigation Bar on top */}
-      <div className="navbar">
-        <div className="header">
-          <h2>Url Shortener</h2>
-
-          <GiHamburgerMenu className="ham" onClick={() => Toggle()} />
-        </div>
-
-        <ul style={{ display: show }}>
-          <li>
-            <Link to="/urlshortener">Url Shortener</Link>
-          </li>
-          <li>
-            <Link to="/urls">Url(s)</Link>
-          </li>
-          <li>
-            <Link to="/logout">Logout</Link>
-          </li>
-        </ul>
-      </div>
+      <Navbar />
 
       <Switch>
         <Route path="/login">
@@ -87,7 +64,7 @@ function App() {
 
         {/* List of URLs generated */}
         <Route path="/urls">
-          <URLs urlData={urlData} handleSubmit={handleSubmit} />
+          <URLs urlData={urlData} handleSubmit={handleSubmit} Data={Data} />
         </Route>
 
         {/* Logout */}
@@ -95,7 +72,7 @@ function App() {
       </Switch>
 
       {/* Footer */}
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }

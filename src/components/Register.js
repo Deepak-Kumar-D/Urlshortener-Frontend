@@ -11,29 +11,39 @@ export default function Register() {
         <p
           style={{
             padding: "0",
-            fontSize: "1.5rem",
+            fontSize: "1rem",
             width: "100%",
             textAlign: "left",
             cursor: "pointer",
           }}
           onClick={() => history.goBack()}
         >
-          Go Back
+          ⇐ click to go back
         </p>
 
-        <input type="text" placeholder="First Name" name="fname" />
+        <div className="b-border">
+          <input type="text" placeholder="First Name" name="fname" />
+        </div>
 
-        <input type="text" placeholder="Last Name" name="lname" />
+        <div className="b-border">
+          <input type="text" placeholder="Last Name" name="lname" />
+        </div>
 
-        <input type="text" placeholder="E-mail" name="email" />
+        <div className="b-border">
+          <input type="text" placeholder="E-mail" name="email" />
+        </div>
 
-        <input type="text" placeholder="Password" name="password" />
+        <div className="b-border">
+          <input type="password" placeholder="Password" name="password" />
+        </div>
 
-        <input
-          type="text"
-          placeholder="Confirm Password"
-          name="confirmpassword"
-        />
+        <div className="b-border">
+          <input
+            type="password"
+            placeholder="Confirm Password"
+            name="confirmpassword"
+          />
+        </div>
 
         <input type="submit" value="SignUp" />
       </form>

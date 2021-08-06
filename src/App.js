@@ -49,6 +49,12 @@ function App() {
       <Navbar />
 
       <Switch>
+        <Route exact path="/">
+          <div className="home aligned">
+            <h1>Welcome to URL Shortener</h1>
+          </div>
+        </Route>
+
         <Route path="/login">
           <Login />
         </Route>

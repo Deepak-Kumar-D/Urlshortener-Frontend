@@ -1,51 +1,102 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
+import { FaUserAlt } from "react-icons/fa";
+import { RiLockPasswordFill } from "react-icons/ri";
+import { MdEmail } from "react-icons/md";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { useForm } from "react-hook-form";
+
+const schema = yup.object().shape({
+  fname: yup.string().required(),
+  lname: yup.string().required(),
+  email: yup.string().email().required(),
+  password: yup.string().min(3, "⚠ Minimum 10 characters!").required(),
+  cpassword: yup
+    .string()
+    .oneOf([yup.ref("password"), null])
+    .required(),
+});
 
 export default function Register() {
   const history = useHistory();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(schema) });
+
+  const onSubmit = () => {
+    reset();
+  };
 
   return (
-    <div className="generateForm login">
+    <div className="generateForm aligned login">
       <p>{"{ Sign-Up }"}</p>
-      <form>
-        <p
-          style={{
-            padding: "0",
-            fontSize: "1rem",
-            width: "100%",
-            textAlign: "left",
-            cursor: "pointer",
-          }}
-          onClick={() => history.goBack()}
-        >
+      <form method="POST" onSubmit={handleSubmit(onSubmit)}>
+        <p className="uline back" onClick={() => history.goBack()}>
           ⇐ click to go back
         </p>
 
-        <div className="b-border">
-          <input type="text" placeholder="First Name" name="fname" />
+        <div className="flex b-border">
+          <FaUserAlt className="form-icon" />
+          <input
+            type="text"
+            placeholder="First Name"
+            name="fname"
+            {...register("fname")}
+          />
         </div>
+        <p className="message">{errors.fname && "⚠ First name is empty!"}</p>
 
-        <div className="b-border">
-          <input type="text" placeholder="Last Name" name="lname" />
+        <div className="flex b-border">
+          <FaUserAlt className="form-icon" />
+          <input
+            type="text"
+            placeholder="Last Name"
+            name="lname"
+            {...register("lname")}
+          />
         </div>
+        <p className="message">{errors.lname && "⚠ Last name is empty!"}</p>
 
-        <div className="b-border">
-          <input type="text" placeholder="E-mail" name="email" />
+        <div className="flex b-border">
+          <MdEmail className="form-icon" />
+          <input
+            type="text"
+            placeholder="E-mail"
+            name="email"
+            {...register("email")}
+          />
         </div>
+        <p className="message">{errors.email && "⚠ Email is required!"}</p>
 
-        <div className="b-border">
-          <input type="password" placeholder="Password" name="password" />
+        <div className="flex b-border">
+          <RiLockPasswordFill className="form-icon" />
+          <input
+            type="password"
+            placeholder="Password"
+            name="password"
+            {...register("password")}
+          />
         </div>
+        <p className="message">{errors.password?.message}</p>
 
-        <div className="b-border">
+        <div className="flex b-border">
+          <RiLockPasswordFill className="form-icon" />
           <input
             type="password"
             placeholder="Confirm Password"
-            name="confirmpassword"
+            name="cpassword"
+            {...register("cpassword")}
           />
         </div>
+        <p className="message">
+          {errors.cpassword && "⚠ Oops! Passwords should match!"}
+        </p>
 
-        <input type="submit" value="SignUp" />
+        <input type="submit" value="Sign-Up" />
       </form>
     </div>
   );

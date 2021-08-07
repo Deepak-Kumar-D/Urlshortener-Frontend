@@ -5,10 +5,6 @@ import { GiHamburgerMenu } from "react-icons/gi";
 export default function Navbar() {
   const [show, setShow] = useState(false);
 
-  // const Toggle = () => {
-  //   if (show === "") setShow("block");
-  //   else setShow("");
-  // };
   return (
     <div className="navbar">
       <div className="header">
@@ -18,10 +14,10 @@ export default function Navbar() {
       </div>
 
       <ul className={show ? "open" : "close"} onClick={() => setShow(!show)}>
-        <li className={show ? "" : "r-border"}>
+        <li>
           <Link to="/urlshortener">Url Shortener</Link>
         </li>
-        <li className={show ? "" : "r-border"}>
+        <li>
           <Link to="/urls">Url(s)</Link>
         </li>
         <li>

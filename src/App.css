@@ -61,6 +61,9 @@ body {
   justify-content: flex-end;
   align-items: center;
 }
+.navbar li {
+  border-left: 1px solid #60578b;
+}
 
 .navbar a {
   text-decoration: none;
@@ -309,6 +312,7 @@ input[type="password"] {
     width: 100%;
     text-align: center;
     border-bottom: 1px solid #60578b;
+    border-left: none;
   }
 
   .ham {

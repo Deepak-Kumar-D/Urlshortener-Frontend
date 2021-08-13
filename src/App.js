@@ -6,6 +6,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import UrlShortener from "./components/UrlShortener";
 import URLs from "./components/URLs";
+import Verify from "./components/Verify";
 import Footer from "./components/Footer";
 
 function App() {
@@ -75,6 +76,11 @@ function App() {
 
         {/* Logout */}
         <Route path="/logout">Logout</Route>
+
+        {/* Verify Router */}
+        <Route path="/verify/:token">
+          <Verify />
+        </Route>
       </Switch>
 
       {/* Footer */}

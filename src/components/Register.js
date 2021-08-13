@@ -1,4 +1,3 @@
-import React from "react";
 import { useHistory } from "react-router-dom";
 import { FaUserAlt } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
@@ -27,8 +26,27 @@ export default function Register() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const onSubmit = () => {
-    reset();
+  const onSubmit = async (data) => {
+    const obj = await fetch("http://localhost:5000/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        fname: data.fname,
+        lname: data.lname,
+        email: data.email,
+        password: data.password,
+      }),
+    });
+
+    const signup = await obj.json();
+
+    if (signup) {
+      alert("Signup Successful!\nCheck your mail to verify your account.");
+      reset();
+      history.push("/login");
+    }
   };
 
   return (

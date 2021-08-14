@@ -1,4 +1,14 @@
+import { useEffect } from "react";
+import { useHistory } from "react-router-dom";
+
 export default function UrlShortener(props) {
+  const history = useHistory();
+
+  useEffect(() => {
+    if (!props.login) {
+      history.push("/login");
+    }
+  });
   return (
     <section className="urlList">
       <div className="row h-row">

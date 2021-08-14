@@ -10,7 +10,7 @@ const schema = yup.object().shape({
   fname: yup.string().required(),
   lname: yup.string().required(),
   email: yup.string().email().required(),
-  password: yup.string().min(3, "⚠ Minimum 10 characters!").required(),
+  password: yup.string().min(6, "⚠ Minimum 6 characters!").required(),
   cpassword: yup
     .string()
     .oneOf([yup.ref("password"), null])
@@ -46,6 +46,8 @@ export default function Register() {
       alert("Signup Successful!\nCheck your mail to verify your account.");
       reset();
       history.push("/login");
+    } else {
+      alert(signup.error);
     }
   };
 

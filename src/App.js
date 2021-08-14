@@ -45,7 +45,7 @@ function App() {
 
   useEffect(() => {
     Data();
-  }, []);
+  });
   return (
     <div className="App">
       <img className="bgImg" src="/images/Triangle Pattern.png" alt="bgImg" />
@@ -87,17 +87,22 @@ function App() {
 
         {/* Generate URL Shortener Route */}
         <Route path="/urlshortener">
-          <UrlShortener urlData={urlData} setUrl={setUrl} />
+          <UrlShortener urlData={urlData} setUrl={setUrl} login={login} />
         </Route>
 
         {/* List of URLs generated */}
         <Route path="/urls">
-          <URLs urlData={urlData} handleSubmit={handleSubmit} Data={Data} />
+          <URLs
+            urlData={urlData}
+            handleSubmit={handleSubmit}
+            Data={Data}
+            login={login}
+          />
         </Route>
 
         {/* Logout */}
         <Route path="/logout">
-          <Logout setLogin={setLogin} />
+          <Logout login={login} setLogin={setLogin} />
         </Route>
       </Switch>
 

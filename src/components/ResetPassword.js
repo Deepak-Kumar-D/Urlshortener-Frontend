@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { useHistory, useParams } from "react-router-dom";
 
 const schema = yup.object().shape({
-  password: yup.string().required(),
+  password: yup.string().min(6, "⚠ Minimum 6 characters!").required(),
   cpassword: yup
     .string()
     .oneOf([yup.ref("password"), null])

@@ -1,4 +1,14 @@
+import { useEffect } from "react";
+import { useHistory } from "react-router-dom";
+
 export default function URLs(props) {
+  const history = useHistory();
+
+  useEffect(() => {
+    if (!props.login) {
+      history.push("/login");
+    }
+  });
   return (
     //   Input and generate button for generating a short url
     <div className="generateForm aligned">

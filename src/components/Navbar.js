@@ -26,11 +26,15 @@ export default function Navbar({ login }) {
             <Link to="/urls">Url(s)</Link>
           </li>
           <li>
-            <Link to="/logout">Logout</Link>
+            <Link to="/logout">Sign-Out</Link>
           </li>
         </ul>
       ) : (
-        ""
+        <ul>
+          <li>
+            <Link to="/login">Sign-In</Link>
+          </li>
+        </ul>
       )}
     </div>
   );

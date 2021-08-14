@@ -35,9 +35,9 @@ export default function Login({ setLogin }) {
     const signin = await obj.json();
 
     if (obj.status === 400 || !signin) {
-      console.log(signin);
+      alert(signin.error);
     } else {
-      console.log("Login Success");
+      alert("Login Successful!");
       setLogin(true);
       history.push("/urlshortener");
     }

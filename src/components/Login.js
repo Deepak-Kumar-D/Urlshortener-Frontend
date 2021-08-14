@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -10,18 +10,42 @@ const schema = yup.object().shape({
   password: yup.string().required(),
 });
 
-export default function Login() {
+export default function Login({ setLogin }) {
+  const history = useHistory();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const onSubmit = () => {};
+  const onSubmit = async (data) => {
+    const obj = await fetch("http://localhost:5000/signin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: data.email,
+        password: data.password,
+      }),
+      mode: "cors",
+      credentials: "include",
+    });
+
+    const signin = await obj.json();
+
+    if (obj.status === 400 || !signin) {
+      console.log(signin);
+    } else {
+      console.log("Login Success");
+      setLogin(true);
+      history.push("/urlshortener");
+    }
+  };
   return (
     <div className="generateForm aligned login">
       <p>{"{ Sign-In }"}</p>
-      <form method="GET" onSubmit={handleSubmit(onSubmit)}>
+      <form method="POST" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex b-border">
           <MdEmail className="form-icon" />
           <input

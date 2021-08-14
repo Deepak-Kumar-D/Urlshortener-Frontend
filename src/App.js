@@ -3,13 +3,17 @@ import { useState, useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Login from "./components/Login";
+import Logout from "./components/Logout";
 import Register from "./components/Register";
 import UrlShortener from "./components/UrlShortener";
 import URLs from "./components/URLs";
 import Verify from "./components/Verify";
+import ForgotPassword from "./components/ForgotPassword";
+import ResetPassword from "./components/ResetPassword";
 import Footer from "./components/Footer";
 
 function App() {
+  const [login, setLogin] = useState(false);
   const [url, setUrl] = useState();
   const [urlData, setUrlData] = useState([]);
 
@@ -47,7 +51,7 @@ function App() {
       <img className="bgImg" src="/images/Triangle Pattern.png" alt="bgImg" />
 
       {/* Navigation Bar on top */}
-      <Navbar />
+      <Navbar login={login} />
 
       <Switch>
         <Route exact path="/">
@@ -56,12 +60,29 @@ function App() {
           </div>
         </Route>
 
+        {/* User Login */}
         <Route path="/login">
-          <Login />
+          <Login setLogin={setLogin} />
         </Route>
 
+        {/* User Registeration */}
         <Route path="/register">
           <Register />
+        </Route>
+
+        {/* Verify Router */}
+        <Route path="/verify/:token">
+          <Verify />
+        </Route>
+
+        {/* Forgot Password */}
+        <Route path="/forgotpassword">
+          <ForgotPassword />
+        </Route>
+
+        {/* Reset Password */}
+        <Route path="/resetpassword/:token">
+          <ResetPassword />
         </Route>
 
         {/* Generate URL Shortener Route */}
@@ -75,11 +96,8 @@ function App() {
         </Route>
 
         {/* Logout */}
-        <Route path="/logout">Logout</Route>
-
-        {/* Verify Router */}
-        <Route path="/verify/:token">
-          <Verify />
+        <Route path="/logout">
+          <Logout setLogin={setLogin} />
         </Route>
       </Switch>
 

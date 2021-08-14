@@ -23,7 +23,7 @@ function Verify() {
 
   useEffect(() => {
     Verification();
-  }, []);
+  });
   return <div></div>;
 }
 

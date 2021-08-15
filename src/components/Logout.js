@@ -11,14 +11,17 @@ export default function Logout(props) {
 
     const logout = async () => {
       try {
-        const obj = await fetch("http://localhost:5000/signout", {
-          method: "GET",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-        });
+        const obj = await fetch(
+          "https://db-urlshortener.herokuapp.com/signout",
+          {
+            method: "GET",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+          }
+        );
 
         history.push("/login", { replace: true });
         props.setLogin(false);

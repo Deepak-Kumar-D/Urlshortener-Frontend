@@ -6,12 +6,15 @@ function Verify() {
   const history = useHistory();
 
   const Verification = async () => {
-    const obj = await fetch(`http://localhost:5000/verify/${token}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/JSON",
-      },
-    });
+    const obj = await fetch(
+      `https://db-urlshortener.herokuapp.com/verify/${token}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/JSON",
+        },
+      }
+    );
 
     const data = await obj.json();
 

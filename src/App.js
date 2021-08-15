@@ -33,7 +33,7 @@ function App() {
   // Function to create and post the short and long urls to the  db
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await fetch("http://localhost:5000/shorturl", {
+    await fetch("https://db-urlshortener.herokuapp.com/shorturl", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ longUrl: url }),

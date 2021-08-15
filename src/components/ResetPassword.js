@@ -24,13 +24,16 @@ export default function ResetPassword() {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmit = async (data) => {
-    const obj = await fetch(`http://localhost:5000/resetPassword/${token}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        password: data.password,
-      }),
-    });
+    const obj = await fetch(
+      `https://db-urlshortener.herokuapp.com/resetPassword/${token}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          password: data.password,
+        }),
+      }
+    );
 
     console.log(await obj.json());
     console.log(token);

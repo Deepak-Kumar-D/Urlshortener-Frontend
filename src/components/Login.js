@@ -19,7 +19,7 @@ export default function Login({ setLogin }) {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmit = async (data) => {
-    const obj = await fetch("http://localhost:5000/signin", {
+    const obj = await fetch("https://db-urlshortener.herokuapp.com/signin", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

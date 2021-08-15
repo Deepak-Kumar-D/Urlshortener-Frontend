@@ -27,7 +27,7 @@ export default function Register() {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmit = async (data) => {
-    const obj = await fetch("http://localhost:5000/signup", {
+    const obj = await fetch("https://db-urlshortener.herokuapp.com/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -62,12 +62,6 @@ function App() {
       <Navbar login={login} />
 
       <Switch>
-        {/* <Route exact path="/">
-          <div className="home aligned">
-            <h1>Welcome to URL Shortener</h1>
-          </div>
-        </Route> */}
-
         {/* User Login */}
         <Route exact path="/">
           <Login setLogin={setLogin} />

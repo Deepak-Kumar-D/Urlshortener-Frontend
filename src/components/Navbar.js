@@ -30,7 +30,7 @@ export default function Navbar({ login }) {
           </li>
         </ul>
       ) : (
-        <ul>
+        <ul className="btnlogin">
           <li>
             <Link to="/login">Sign-In</Link>
           </li>

@@ -14,16 +14,18 @@ import Footer from "./components/Footer";
 
 function App() {
   const [login, setLogin] = useState(false);
-  const [url, setUrl] = useState();
+  const [url, setUrl] = useState("");
   const [urlData, setUrlData] = useState([]);
 
   // Fetching the url data on page load and on data update
   const Data = async () => {
-    const obj = await fetch("https://db-urlshortener.herokuapp.com/getUrl", {
+    const obj = await fetch("http://localhost:5000/getUrl", {
       method: "GET",
       headers: {
+        Accept: "application/json",
         "Content-Type": "application/JSON",
       },
+      credentials: "include",
     });
 
     const data = await obj.json();
@@ -33,7 +35,7 @@ function App() {
   // Function to create and post the short and long urls to the  db
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const obj = await fetch("https://db-urlshortener.herokuapp.com/shorturl", {
+    const obj = await fetch("http://localhost:5000/shorturl", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ longUrl: url }),
@@ -42,10 +44,10 @@ function App() {
     if (obj.status === 401) {
       alert(obj.error);
     } else {
-      alert("You URL is Shortened!");
+      setUrl("");
+      alert("Your URL is Shortened!");
     }
 
-    setUrl("");
     Data();
   };
 
@@ -95,20 +97,15 @@ function App() {
         <Route path="/urlshortener">
           <UrlShortener
             handleSubmit={handleSubmit}
-            urlData={urlData}
             setUrl={setUrl}
+            urlData={urlData}
             login={login}
           />
         </Route>
 
         {/* List of URLs generated */}
         <Route path="/urls">
-          <URLs
-            urlData={urlData}
-            handleSubmit={handleSubmit}
-            Data={Data}
-            login={login}
-          />
+          <URLs urlData={urlData} handleSubmit={handleSubmit} login={login} />
         </Route>
 
         {/* Logout */}

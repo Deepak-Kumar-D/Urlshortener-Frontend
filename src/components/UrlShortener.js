@@ -1,17 +1,35 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 
 export default function URLs(props) {
   const history = useHistory();
+  const [todayUrl, setTodayUrl] = useState([]);
+
+  const today = async () => {
+    const obj = await fetch("http://localhost:5000/currdate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+    });
+    const data = await obj.json();
+    setTodayUrl(data);
+  };
 
   useEffect(() => {
     if (!props.login) {
       history.push("/login");
     }
+
+    today();
   });
   return (
     //   Input and generate button for generating a short url
     <div className="generateForm aligned">
+      <h5 className="date">
+        Today <span>{todayUrl.length}</span>
+      </h5>
+      <h5 className="date">
+        This Month <span>{props.urlData.length}</span>
+      </h5>
       <p>{"{ Shorten your URL below }"}</p>
       <form
         className="aligned"

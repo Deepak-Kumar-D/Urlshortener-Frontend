@@ -7,35 +7,27 @@ export default function Logout(props) {
   useEffect(() => {
     if (!props.login) {
       history.push("/login");
-    }
-
-    const logout = async () => {
-      try {
-        const obj = await fetch(
-          "https://db-urlshortener.herokuapp.com/signout",
-          {
-            method: "GET",
+    } else {
+      const logout = async () => {
+        try {
+          await fetch("http://localhost:5000/signout", {
+            method: "POST",
             headers: {
               Accept: "application/json",
               "Content-Type": "application/json",
             },
             credentials: "include",
-          }
-        );
+          });
 
-        history.push("/login", { replace: true });
-        props.setLogin(false);
-
-        if (obj.status !== 200) {
-          const error = new Error(obj.error);
-          throw error;
+          props.setLogin(false);
+          history.push("/login", { replace: true });
+        } catch (err) {
+          console.log(err);
         }
-      } catch (err) {
-        console.log(err);
-      }
-    };
+      };
 
-    logout();
+      logout();
+    }
   });
   return <div></div>;
 }

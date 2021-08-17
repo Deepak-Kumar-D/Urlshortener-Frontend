@@ -45,7 +45,7 @@ export default function Register() {
     if (signup) {
       alert("Signup Successful!\nCheck your mail to verify your account.");
       reset();
-      history.push("/login");
+      history.push("/");
     } else {
       alert(signup.error);
     }

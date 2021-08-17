@@ -19,7 +19,7 @@ function App() {
 
   // Fetching the url data on page load and on data update
   const Data = async () => {
-    const obj = await fetch("http://localhost:5000/getUrl", {
+    const obj = await fetch("https://db-urlshortener.herokuapp.com/getUrl", {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -35,7 +35,7 @@ function App() {
   // Function to create and post the short and long urls to the  db
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const obj = await fetch("http://localhost:5000/shorturl", {
+    const obj = await fetch("https://db-urlshortener.herokuapp.com/shorturl", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ longUrl: url }),
@@ -62,14 +62,14 @@ function App() {
       <Navbar login={login} />
 
       <Switch>
-        <Route exact path="/">
+        {/* <Route exact path="/">
           <div className="home aligned">
             <h1>Welcome to URL Shortener</h1>
           </div>
-        </Route>
+        </Route> */}
 
         {/* User Login */}
-        <Route path="/login">
+        <Route exact path="/">
           <Login setLogin={setLogin} />
         </Route>
 

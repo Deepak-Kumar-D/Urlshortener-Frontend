@@ -6,7 +6,7 @@ export default function UrlShortener(props) {
 
   useEffect(() => {
     if (!props.login) {
-      history.push("/login");
+      history.push("/");
     }
   });
   return (

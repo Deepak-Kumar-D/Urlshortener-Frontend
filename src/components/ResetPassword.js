@@ -43,7 +43,7 @@ export default function ResetPassword() {
         "Password reset successful.\nPress 'Okay' to login with new password."
       );
       reset();
-      history.push("/login");
+      history.push("/");
     } else {
       alert("Invalid attempt!");
     }

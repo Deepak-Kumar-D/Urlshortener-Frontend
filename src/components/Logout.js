@@ -6,11 +6,11 @@ export default function Logout(props) {
 
   useEffect(() => {
     if (!props.login) {
-      history.push("/login");
+      history.push("/");
     } else {
       const logout = async () => {
         try {
-          await fetch("http://localhost:5000/signout", {
+          await fetch("https://db-urlshortener.herokuapp.com/signout", {
             method: "POST",
             headers: {
               Accept: "application/json",
@@ -20,7 +20,7 @@ export default function Logout(props) {
           });
 
           props.setLogin(false);
-          history.push("/login", { replace: true });
+          history.push("/", { replace: true });
         } catch (err) {
           console.log(err);
         }

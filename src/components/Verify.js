@@ -20,7 +20,7 @@ function Verify() {
 
     if (data.verified) {
       alert("Your account has been verified.\n Please login.");
-      history.push("/login");
+      history.push("/");
     }
   };
 

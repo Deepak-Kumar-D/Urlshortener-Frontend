@@ -6,7 +6,7 @@ export default function URLs(props) {
   const [todayUrl, setTodayUrl] = useState([]);
 
   const today = async () => {
-    const obj = await fetch("http://localhost:5000/currdate", {
+    const obj = await fetch("https://db-urlshortener.herokuapp.com/currdate", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
     });
@@ -16,7 +16,7 @@ export default function URLs(props) {
 
   useEffect(() => {
     if (!props.login) {
-      history.push("/login");
+      history.push("/");
     }
 
     today();
